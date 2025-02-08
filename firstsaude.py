@@ -2,7 +2,7 @@ import streamlit as st
 import openai
 
 # Configuração da API da OpenAI
-openai.api_key = "SUA_CHAVE_API_AQUI"  # Substitua pela sua chave de API
+openai.api_key = st.secrets["OPENAI_API_KEY"]  # Usando segredo do Streamlit
 
 # Interface do FirstSaúde
 st.title("🤖 First Saúde - Seu Assistente Virtual da Clínica First")
@@ -16,12 +16,11 @@ def gerar_resposta(pergunta):
         resposta = openai.ChatCompletion.create(
             model="gpt-4",
             messages=[
-                {"role": "system", "content": "Você é o FirstSaúde, o assistente virtual da Clínica First. Explique termos médicos de forma simples e acolhedora. Responda dúvidas sobre diagnósticos, tratamentos, exames, prevenção de câncer e informações relacionadas à saúde."},
+                {"role": "system", "content": "Você é o FirstSaúde, o assistente virtual da Clínica First. Explique termos médicos de forma simples e acolhedora. Responda dúvidas sobre diagnósticos, tratamentos e prevenção."},
                 {"role": "user", "content": pergunta}
             ]
         )
         return resposta.choices[0].message.content.strip()
-
     except Exception as e:  # Alterado para capturar qualquer exceção genérica
         return f"Erro na API da OpenAI: {str(e)}"
 
