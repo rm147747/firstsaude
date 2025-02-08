@@ -3,7 +3,7 @@ import openai
 import os
 
 # Configuração da API da OpenAI
-openai.api_key = os.getenv("OPENAI_API_KEY")  # Use sua chave de API corretamente
+openai.api_key = os.getenv("OPENAI_API_KEY")  # Use sua chave da API
 
 # Interface do FirstSaúde
 st.title("🤖 FirstSaúde - Seu Assistente Virtual da Clínica First")
@@ -19,8 +19,8 @@ def gerar_resposta(pergunta):
                 {"role": "user", "content": pergunta}
             ]
         )
-        return resposta.choices[0].message["content"].strip()
-    except Exception as e:  # Captura de erro genérico
+        return resposta.choices[0].message.content.strip()  # Correção aqui!
+    except Exception as e:
         return f"Erro ao processar sua solicitação: {str(e)}"
 
 # Exibir a resposta quando o usuário fizer uma pergunta
