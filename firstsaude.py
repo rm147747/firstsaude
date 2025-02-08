@@ -1,9 +1,8 @@
 import streamlit as st
 import openai
-import os
 
-# Configuração da API da OpenAI
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# ATENÇÃO: Não é seguro manter essa chave no código em produção!
+openai.api_key = "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"
 
 # Interface do FirstSaúde
 st.title("🤖 FirstSaúde - Seu Assistente Virtual da Clínica First")
@@ -16,7 +15,7 @@ def gerar_resposta(pergunta):
     resposta = openai.ChatCompletion.create(
         model="gpt-4",
         messages=[
-            {"role": "system", "content": "Você é o FirstSaúde, o assistente virtual da Clínica First. Explique termos médicos de forma simples e acolhedora. Responda dúvidas sobre diagnósticos, tratamentos, exames, prevenção de câncer, oncologia, hematologia, clínica médica e medicina interna."},
+            {"role": "system", "content": "Você é o FirstSaúde, o assistente virtual da Clínica First. Explique termos médicos de forma simples e acolhedora."},
             {"role": "user", "content": pergunta}
         ]
     )
