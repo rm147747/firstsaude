@@ -1,8 +1,9 @@
 import streamlit as st
 import openai
+import os
 
-# ATENÇÃO: Não é seguro manter essa chave no código em produção!
-openai.api_key = "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"
+# Configuração da API da OpenAI
+openai.api_key = os.getenv("OPENAI_API_KEY")  # Certifique-se de configurar essa variável no Streamlit
 
 # Interface do FirstSaúde
 st.title("🤖 FirstSaúde - Seu Assistente Virtual da Clínica First")
@@ -12,14 +13,17 @@ user_input = st.text_input("Digite sua pergunta aqui:")
 
 # Função para gerar a resposta do FirstSaúde
 def gerar_resposta(pergunta):
-    resposta = openai.ChatCompletion.create(
-        model="gpt-4",
-        messages=[
-            {"role": "system", "content": "Você é o FirstSaúde, o assistente virtual da Clínica First. Explique termos médicos de forma simples e acolhedora."},
-            {"role": "user", "content": pergunta}
-        ]
-    )
-    return resposta['choices'][0]['message']['content'].strip()
+    try:
+        resposta = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": "Você é o FirstSaúde, o assistente virtual da Clínica First. Explique termos médicos de forma simples e acolhedora."},
+                {"role": "user", "content": pergunta}
+            ]
+        )
+        return resposta['choices'][0]['message']['content'].strip()
+    except Exception as e:
+        return f"Erro na API da OpenAI: {e}"
 
 # Exibir a resposta quando o usuário fizer uma pergunta
 if user_input:
