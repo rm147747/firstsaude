@@ -15,13 +15,14 @@ user_input = st.text_input("Digite sua pergunta aqui:")
 def gerar_resposta(pergunta):
     try:
         resposta = openai.ChatCompletion.create(
-            model="gpt-4",
-            messages=[
-                {"role": "system", "content": "Você é o FirstSaúde, o assistente virtual da Clínica First. Explique termos médicos de forma simples e acolhedora."},
-                {"role": "user", "content": pergunta}
-            ]
-        )
-        return resposta.choices[0].message.content.strip()
+    model="gpt-4",
+    messages=[
+        {"role": "system", "content": "Você é o FirstSaúde, o assistente virtual da Clínica First. Explique termos médicos de forma simples e acolhedora."},
+        {"role": "user", "content": pergunta}
+    ]
+)
+return resposta['choices'][0]['message']['content'].strip()
+
     except Exception as e:
         return f"Erro na API da OpenAI: {e}"
 
