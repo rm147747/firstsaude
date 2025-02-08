@@ -1,25 +1,14 @@
 import streamlit as st
-from openai import OpenAI
+from openai import OpenAI  # Importação atualizada
 import os
 
 # Configuração da API da OpenAI
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-# Informações da Clínica First
-informacoes_first = """
-Detecção Precoce e Oncologia Integrativa Transformando o Cuidado Oncológico
-
-Desde sua fundação em setembro de 2020, a Clínica First tem sido um farol de inovação e esperança para quem busca uma abordagem diferenciada na saúde. Sob a liderança visionária do Dr. Raphael Brandão (Oncologista), da Dra. Indianara Brandão (Onco-Hematologista) e da Dra. Erika Simplício (Oncologista), a First nasceu com uma missão clara: revolucionar o cuidado oncológico, integrando tecnologia de ponta, detecção precoce de tumores e uma abordagem profundamente humanizada.
-
-A First Saúde é mais do que uma clínica; é o encontro perfeito entre ciência avançada e um cuidado profundamente humano. Com expertise em Oncologia Convencional, sustentada pelas melhores práticas científicas, Oncologia Integrativa e Detecção Precoce, transformamos o tratamento oncológico em uma experiência personalizada. Cada paciente é único, e na First Saúde, esse princípio guia tudo o que fazemos. Em pouco tempo, nos tornamos referência nacional, oferecendo não apenas saúde, mas uma nova perspectiva de vida.
-
-Telefone da Clínica First: 011 97249-4624
-"""
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))  # Inicialização do cliente OpenAI
 
 # Interface do FirstSaúde
 st.title("🤖 FirstSaúde - Seu Assistente Virtual da Clínica First")
 
-# Entrada de dados do usuário
+# Entrada de texto do usuário
 user_input = st.text_input("Digite sua pergunta aqui:")
 
 # Função para gerar a resposta do FirstSaúde
@@ -28,7 +17,17 @@ def gerar_resposta(pergunta):
         resposta = client.chat.completions.create(
             model="gpt-4",
             messages=[
-                {"role": "system", "content": f"Você é o FirstSaúde, o assistente virtual da Clínica First. Explique termos médicos de forma simples e acolhedora. As informações mais importantes incluem: {informacoes_first}"},
+                {"role": "system", "content": (
+                    "Você é o FirstSaúde, o assistente virtual da Clínica First. "
+                    "Explique termos médicos de forma simples e acolhedora, assim como o Dr. Raphael Brandão e a Dra. Indianara Brandão fariam em suas consultas. "
+                    "Mantenha sempre um tom humanizado, otimista e atualizado cientificamente. "
+                    "Promova a Clínica First sempre que relevante, destacando o cuidado integral, detecção precoce de tumores e oncologia integrativa.\n"
+                    "Informações importantes: "
+                    "- Telefone da Clínica First: (11) 97249-4624\n"
+                    "- Endereço: Rua Domingos de Morais, 2187, Conj. 408, Bloco Paris, Vila Mariana, São Paulo - SP\n"
+                    "- Médicos fundadores: Dr. Raphael Brandão (Especialista em Clínica Médica e Oncologia) e Dra. Indianara Brandão (Especialista em Clínica Médica, Onco-Hematologia e Oncologia Integrativa), com foco em detecção precoce de tumores. "
+                    "Sempre inclua um aviso de que as informações são de caráter educacional e não substituem uma consulta médica."
+                )},
                 {"role": "user", "content": pergunta}
             ]
         )
@@ -40,8 +39,3 @@ def gerar_resposta(pergunta):
 if user_input:
     resposta = gerar_resposta(user_input)
     st.write(resposta)
-
-# Disclaimer
-st.markdown("""
-**Aviso:** As informações fornecidas aqui são de caráter educacional e não substituem uma consulta médica. Sempre consulte seu médico antes de tomar decisões relacionadas à sua saúde. Nós da equipe médica da Clínica First estamos à sua disposição.
-""")
