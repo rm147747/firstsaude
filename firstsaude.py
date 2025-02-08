@@ -16,7 +16,7 @@ def gerar_resposta(prompt):
     return response.choices[0].message.content  # Retorna a resposta gerada
 
 # Interface do Streamlit
-st.title("FirstSaddle - Seu Assistente Virtual")  # Título da aplicação
+st.title("First Saúde - Seu Assistente Virtual")  # Título da aplicação
 user_input = st.text_input("Digite sua pergunta aqui:")  # Campo de entrada de texto
 
 if user_input:
