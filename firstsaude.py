@@ -21,7 +21,7 @@ def gerar_resposta(pergunta):
         max_tokens=150,
         temperature=0.4
     )
-    return resposta.choices[0].message["content"].strip()
+    return resposta.choices[0]["message"]["content"].strip()
 
 # Exibir a resposta quando o usuário fizer uma pergunta
 if user_input:
