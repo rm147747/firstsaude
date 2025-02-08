@@ -1,8 +1,9 @@
 import streamlit as st
 import openai
+import os
 
 # Configuração da API da OpenAI
-openai.api_key = "OPENAI_API_KEY"  # Substitua com sua chave da API da OpenAI
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Interface do FirstSaúde
 st.title("🤖 FirstSaúde - Seu Assistente Virtual da Clínica First")
@@ -27,4 +28,3 @@ def gerar_resposta(pergunta):
 if user_input:
     resposta = gerar_resposta(user_input)
     st.write(resposta)
-
