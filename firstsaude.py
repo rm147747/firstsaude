@@ -1,8 +1,9 @@
-import streamlit as st
+import os
 import openai
+import streamlit as st
 
-# Configuração da API da OpenAI usando segredo do Streamlit
-openai.api_key = st.secrets["OPENAI_API_KEY"]
+# Configuração da API da OpenAI
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Interface do FirstSaúde
 st.title("🤖 FirstSaúde - Seu Assistente Virtual da Clínica First")
