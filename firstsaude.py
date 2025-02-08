@@ -5,7 +5,7 @@ import openai
 openai.api_key = "SUA_CHAVE_API_AQUI"  # Substitua pela sua chave de API
 
 # Interface do FirstSaúde
-st.title("🤖 FirstSaúde - Seu Assistente Virtual da Clínica First")
+st.title("🤖 First Saúde - Seu Assistente Virtual da Clínica First")
 
 # Caixa de entrada do usuário
 user_input = st.text_input("Digite sua pergunta aqui:")
