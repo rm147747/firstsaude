@@ -20,10 +20,10 @@ def gerar_resposta(pergunta):
                 {"role": "user", "content": pergunta}
             ]
         )
-        return resposta.choices[0].message["content"].strip()
+        return resposta.choices[0].message.content.strip()
 
-    except openai.error.OpenAIError as e:
-        return f"Erro na API da OpenAI: {e}"
+    except Exception as e:  # Alterado para capturar qualquer exceção genérica
+        return f"Erro na API da OpenAI: {str(e)}"
 
 # Exibir a resposta quando o usuário fizer uma pergunta
 if user_input:
