@@ -13,14 +13,12 @@ user_input = st.text_input("Digite sua pergunta aqui:")
 # Função para gerar a resposta do FirstSaúde
 def gerar_resposta(pergunta):
     try:
-        resposta = openai.ChatCompletion.create(
-            model="gpt-4",
-            messages=[
-                {"role": "system", "content": "Você é o FirstSaúde, o assistente virtual da Clínica First. Explique termos médicos de forma simples e acolhedora. Responda dúvidas sobre diagnósticos, tratamentos e prevenção."},
-                {"role": "user", "content": pergunta}
-            ]
+        response = openai.Completion.create(
+            model="text-davinci-003",
+            prompt=f"Você é o FirstSaúde, o assistente virtual da Clínica First. Explique termos médicos de forma simples e acolhedora. Responda dúvidas sobre diagnósticos, tratamentos e prevenção.\n\nPergunta: {pergunta}\nResposta:",
+            max_tokens=150
         )
-        return resposta.choices[0].message.content.strip()
+        return response.choices[0].text.strip()
     except Exception as e:  # Alterado para capturar qualquer exceção genérica
         return f"Erro na API da OpenAI: {str(e)}"
 
