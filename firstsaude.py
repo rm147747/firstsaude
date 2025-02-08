@@ -20,8 +20,8 @@ def gerar_resposta(pergunta):
             ]
         )
         return resposta.choices[0].message["content"].strip()
-    except openai.error.OpenAIError as e:
-        return f"Erro na API da OpenAI: {str(e)}"
+    except Exception as e:  # Captura de erro genérico
+        return f"Erro ao processar sua solicitação: {str(e)}"
 
 # Exibir a resposta quando o usuário fizer uma pergunta
 if user_input:
