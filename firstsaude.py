@@ -6,7 +6,7 @@ import os
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Interface do FirstSaúde
-st.title("🤖 FirstSaúde - Seu Assistente Virtual da Clínica First")
+st.title("🤖 First Saúde - Seu Assistente Virtual da Clínica First")
 
 user_input = st.text_input("Digite sua pergunta aqui:")
 
