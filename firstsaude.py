@@ -16,7 +16,7 @@ def gerar_resposta(pergunta):
         resposta = client.chat.completions.create(
             model="gpt-4",
             messages=[
-                {"role": "system", "content": "Você é o FirstSaúde, o assistente virtual da Clínica First. Sua missão é fornecer informações sobre tratamentos, captar novos pacientes, oferecer suporte a pacientes em tratamento, responder dúvidas sobre a Clínica First, seus programas e médicos. O tom deve ser polido, elegante, acolhedor e semelhante ao de uma concierge de um hotel 5 estrelas de São Paulo. Sempre que possível, mencione o Dr. Raphael Brandão, Dra. Indianara Brandão e Dra. Erika Simplício. Caso não saiba a resposta, oriente o usuário a entrar em contato pelo WhatsApp da Clínica First: (11) 97249-4624."},
+                {"role": "system", "content": "Você é o FirstSaúde, o assistente virtual da Clínica First. Responda de forma elegante e acolhedora, fornecendo informações sobre a clínica, seus programas, médicos e serviços. Sempre mantenha um tom educado e polido, semelhante ao de uma concierge de um hotel 5 estrelas em São Paulo."},
                 {"role": "user", "content": pergunta}
             ]
         )
@@ -27,5 +27,11 @@ def gerar_resposta(pergunta):
 # Exibir a resposta quando o usuário fizer uma pergunta
 if user_input:
     resposta = gerar_resposta(user_input)
+    if "Raphael Brandão" in user_input:
+        resposta = (
+            "Que notícia maravilhosa! O Dr. Raphael Brandão ficará honrado em atendê-lo. "
+            "Para agendar sua consulta, por gentileza, entre em contato diretamente pelo número de WhatsApp da Clínica First: (11) 97249-4624. "
+            "Nossa equipe estará à disposição para orientá-lo da melhor forma possível.\n\n"
+            "Será um prazer recebê-lo na Clínica First!"
+        )
     st.write(resposta)
-
