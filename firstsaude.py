@@ -35,3 +35,4 @@ if user_input:
             "Será um prazer recebê-lo na Clínica First!"
         )
     st.write(resposta)
+
